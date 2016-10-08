@@ -16,7 +16,9 @@
 using namespace std;
 
 list<int> intersections_list(const list<int> &l1, const list<int> &l2);
+list<int> intersections_list2(const list<int> &l1, const list<int> &l2);
 list<int> unions_list(list<int> const &l1, list<int> const &l2);
+list<int> unions_list2(list<int> const &l1, list<int> const &l2);
 void list_print(list<int> &lt);
 
 int main()
@@ -48,12 +50,12 @@ int main()
     }
 
     // exercise 3.4
-    auto l3 = intersections_list(l1, l2);
+    auto l3 = intersections_list2(l1, l2);
     cout << "intersection list size: " << l3.size() << endl;
     list_print(l3);
 
     // exercise 3.5
-    auto l4 = unions_list(l1, l2);
+    auto l4 = unions_list2(l1, l2);
     cout << "union list size: " << l4.size() << endl;
     list_print(l4);
 
@@ -83,6 +85,31 @@ list<int> intersections_list(const list<int> &l1, const list<int> &l2)
     return l3;
 }
 
+list<int> intersections_list2(const list<int> &l1, const list<int> &l2)
+{
+    list<int> retlist;
+    auto itr1 = l1.begin();
+    auto itr2 = l2.begin();
+    while(itr1 != l1.end() && itr2 != l2.end()) 
+    {
+        if(*itr1 < *itr2)
+        {
+            ++itr1;
+        }
+        else if(*itr1 > *itr2)
+        {
+            ++itr2;
+        }
+        else 
+        {
+            retlist.push_back(*itr1);
+            ++itr1;
+            ++itr2;
+        }
+    }
+    return retlist;
+}
+
 // exercise 3.5
 list<int> unions_list(list<int> const &l1, list<int> const &l2)
 {
@@ -110,6 +137,39 @@ list<int> unions_list(list<int> const &l1, list<int> const &l2)
         }
     }
     return l3;
+}
+
+list<int> unions_list2(list<int> const &l1, list<int> const &l2)
+{
+    list<int> retlist = l1;
+    auto itr1 = retlist.begin();
+    auto itr2 = l2.begin();
+
+    while(itr1 != retlist.end() && itr2 != l2.end())
+    {
+        if(*itr1 < *itr2)
+        {
+            ++itr1;
+        }
+        else if(*itr1 > *itr2)
+        {
+            retlist.insert(itr1, *itr2);
+            ++itr2;
+        }
+        else 
+        {
+            ++itr1;
+            ++itr2;
+        }
+    }
+    if(itr1 == retlist.end())
+    {
+        for(;itr2 != l2.end(); ++itr2)
+        {
+            retlist.push_back(*itr2);
+        }
+    }
+    return retlist;
 }
 
 void list_print(list<int> &lt)
