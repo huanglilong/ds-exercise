@@ -63,13 +63,20 @@ int main()
 list<int> intersections_list(const list<int> &l1, const list<int> &l2)
 {
     list<int> l3;
+    auto itr2 = l2.begin();
+
     for(auto itr1 = l1.begin(); itr1 != l1.end(); ++itr1)
     {
-        for(auto itr2 = l2.begin(); itr2 != l2.end(); ++itr2)
+        for(; itr2 != l2.end(); ++itr2)
         {
             if(*itr1 == *itr2)
             {
                 l3.push_back(*itr1);
+                break;                  // next
+            }
+            if(*itr1 < *itr2)
+            {
+                break;
             }
         }
     }
@@ -80,10 +87,10 @@ list<int> intersections_list(const list<int> &l1, const list<int> &l2)
 list<int> unions_list(list<int> const &l1, list<int> const &l2)
 {
     list<int> l3 = l2;
-    
+    auto itr2 = l3.begin();
+
     for(auto itr1 = l1.begin(); itr1 != l1.end(); ++itr1)
     {
-        auto itr2 = l3.begin();
         for(; itr2 != l3.end(); ++itr2)
         {
             if(*itr1 < *itr2)           // push before it2
@@ -99,6 +106,7 @@ list<int> unions_list(list<int> const &l1, list<int> const &l2)
         if(itr2 == l3.end())            // list1's element > all element from list2
         {
             l3.push_back(*itr1);
+            ++itr2;
         }
     }
     return l3;
