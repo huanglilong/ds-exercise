@@ -84,15 +84,49 @@ public:
 
     void add(const Object &x)
     {
-        if(contain(x))
+        auto ptr = head->next;
+        auto prev = head;
+
+        // if(head->next == nullptr)   // empty list
+        // {
+        //     Node *p = new Node;
+        //     p->data = x;
+        //     p->next = head->next;
+        //     head->next = p;
+        //     theSize++;
+        //     return;
+        // }
+
+        while(ptr != nullptr)
         {
-            return;
+            if(ptr->data < x)       // next position
+            {
+                prev = prev->next;
+                ptr = ptr->next;
+            }
+            else if(ptr->data > x)
+            {
+                Node *p = new Node;
+                p->data = x;
+                p->next = prev->next;
+                prev->next = p;
+                theSize++;
+                return;
+            }
+            else
+            {
+                return;
+            }
         }
-        Node *p = new Node;
-        p->data = x;
-        p->next = head->next;
-        head->next = p;
-        theSize++;
+
+        if(ptr == nullptr)      // empty or x greator than all element in the list
+        {
+            Node *p = new Node;
+            p->data = x;
+            p->next = prev->next;
+            prev->next = p;
+            theSize++;
+        }
     }
 
     void remove(const Object &x)

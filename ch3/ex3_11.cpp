@@ -14,7 +14,12 @@ d. add a value x if it is not already contained in the linked list
 e. remove a value x if it is contained in the linked list
 */
 
+/* problems
+3.12 Repeat Exercise 3.11, maintaining the singly linked list in sorted order.
+*/
+
 #include "s_list.h"
+#include <iostream>
 
 int main()
 {
@@ -22,8 +27,9 @@ int main()
     int a[5];
     for(int i=0; i<5; ++i)
     {
-        a[i] = i;
-        sl.add(a[i]);
+        int a;
+        std::cin >> a;
+        sl.add(a);
     }
     sl.print();
     sl.remove(4);
