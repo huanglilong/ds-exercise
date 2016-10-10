@@ -219,7 +219,7 @@ public:
 
         const_iterator begin() const 
         {
-            return const_iterator(head->tail);
+            return const_iterator(head->next);
         }
 
         iterator end( )
