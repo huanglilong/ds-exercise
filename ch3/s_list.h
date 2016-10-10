@@ -42,6 +42,15 @@ public:
             ptr = ptr->next;
         }
         delete head;
+        /*
+        auto ptr = head->next;
+        while(ptr != nullptr)
+        {
+            delete ptr;
+            ptr = ptr->next;
+        }
+        delete head;
+        */
     }
 
     int size() const 
