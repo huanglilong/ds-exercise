@@ -4,6 +4,12 @@
 #include <algorithm>
 #include <iostream>
 
+/* Notes:
+ * 1. lvalue: program can obtain it's address; left side of an assignment statement
+ * 2. rvalue: appear on the right-hand side of assignment statement, for move
+ * 3. binding an rvalue to an rvalue reference results in the value being stored in a location
+ *    whose address can be taken
+*/
 template <typename Object>
 class Vector
 {
